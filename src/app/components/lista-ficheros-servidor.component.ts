@@ -6,16 +6,17 @@ import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
 import { FicherosStore } from '@state/ficheros/ficheros.store';
 
 import { endpoints, environment } from 'environment';
-import { ListboxModule } from 'primeng/listbox';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-ficheros-servidor',
   standalone: true,
-  imports: [CommonModule, ListboxModule],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="lista-ficheros-subidos">
-      <span>Lista de ficheros en el servidor</span>
+    <div>
+      <span class="text-xl font-semibold"
+        >Lista de ficheros en el servidor</span
+      >
       @if($ficherosSubidosServidorRxResource.isLoading() ){
       <span>Cargando...</span>
       } @else{

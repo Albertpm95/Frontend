@@ -2,45 +2,53 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { TextareaModule } from 'primeng/textarea';
 import { endpoints, environment } from '../../environment';
 import { FicheroSubido } from '../interfaces/ficheros-subidos.interface';
 @Component({
   selector: 'app-subida-fichero',
-  imports: [CommonModule, ButtonModule, TextareaModule],
+  imports: [CommonModule],
   template: `
-    <div class="header">
-      <div class="input-fichero">
-        <label for="file">Selecciona un fichero</label>
+    <div class="space-y-4">
+      <!-- Seleccionar fichero -->
+      <div class="flex flex-col space-y-2">
+        <label for="file" class="text-sm font-medium text-gray-700">
+          Selecciona un fichero:
+        </label>
         <input
-          pInputText
+          id="file"
           type="file"
+          class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
           (change)="seleccionarFicheroParaSubir($event)"
         />
       </div>
-      <div class="descripcion-fichero">
-        <label for="file">Introduzca una descripción</label>
+
+      <!-- Introducir descripción -->
+      <div class="flex flex-col space-y-2">
+        <label for="descripcion" class="text-sm font-medium text-gray-700">
+          Introduzca una descripción:
+        </label>
         <textarea
-          pTextarea
-          id="descripcion-fichero"
-          type="textarea"
+          id="descripcion"
           formControl="descripcionFichero"
+          class="w-full p-2 text-sm border border-gray-300 rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
         ></textarea>
       </div>
-      <p-button
-        pButton
-        label="Subir"
-        class="p-button p-button-primary"
+
+      <!-- Botón Subir -->
+      <button
+        class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 focus:outline-none"
         (click)="subirFichero()"
-      ></p-button>
+      >
+        Subir
+      </button>
     </div>
-    <div>
-      <p>{{ resultado }}</p>
+
+    <!-- Resultado -->
+    <div class="mt-4">
+      <p class="text-sm text-gray-700">{{ resultado }}</p>
     </div>
   `,
   standalone: true,
-  styles: [``],
 })
 export class SubidaFicherosComponent {
   http = inject(HttpClient);

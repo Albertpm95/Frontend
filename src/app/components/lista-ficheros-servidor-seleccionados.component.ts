@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
-import { Store } from '@ngrx/store';
-import { FicheroState } from '@state/ficheros/ficheros.reducer';
+import { FicherosStore } from '@state/ficheros/ficheros.store';
+
 import { endpoints, environment } from 'environment';
 import { ButtonModule } from 'primeng/button';
 
@@ -16,8 +16,10 @@ import { ButtonModule } from 'primeng/button';
       <span class="text-xl font-semibold"
         >Lista de ficheros en el servidor</span
       >
+      <ul></ul>
       <ul class="p-list">
-        @for (fichero of listaFicherosServidorSeleccionados; track fichero.id) {
+        @for (fichero of store.listaFicherosServidorSeleccionados(); track
+        fichero.id) {
         <li
           class="p-list-item p-shadow-1 p-mb-2 p-p-3 p-d-flex p-jc-between p-ai-center p-hover-shadow"
           (click)="desSeleccionarFicheroParaProcesar(fichero)"
@@ -50,43 +52,17 @@ import { ButtonModule } from 'primeng/button';
       </p-button>
     </div>
   `,
-  styles: [
-    `
-      .p-list-item {
-        cursor: pointer;
-        transition: box-shadow 0.3s ease;
-      }
-
-      .p-list-item:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      }
-
-      .p-tag {
-        min-width: 100px;
-        text-align: center;
-      }
-    `,
-  ],
+  styles: [],
 })
 export class FicherosServidorSeleccionadosComponent {
   http = inject(HttpClient);
-  store = inject(Store<FicheroState>);
+  store = inject(FicherosStore);
   resultado: string = '';
 
   listaFicherosServidorSeleccionados: FicheroSubido[] = [];
 
-  ngOnInit() {
-    this.store.select('ficheros').subscribe((state) => {
-      this.listaFicherosServidorSeleccionados =
-        state.listaFicherosServidorSeleccionados;
-    });
-  }
-
   desSeleccionarFicheroParaProcesar($event: FicheroSubido) {
-    this.listaFicherosServidorSeleccionados =
-      this.listaFicherosServidorSeleccionados.filter(
-        (fichero) => fichero.id !== $event.id
-      );
+    this.store.desSeleccionarFicheroParaProcesar($event);
   }
 
   enviarListaFicherosProcesar() {

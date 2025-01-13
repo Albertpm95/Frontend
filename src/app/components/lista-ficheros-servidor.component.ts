@@ -1,46 +1,57 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
-import { Store } from '@ngrx/store';
-import * as FicheroActions from '@state/ficheros/ficheros.actions';
-import { FicheroState } from '@state/ficheros/ficheros.reducer';
+import { FicherosStore } from '@state/ficheros/ficheros.store';
+
+import { endpoints, environment } from 'environment';
+import { ListboxModule } from 'primeng/listbox';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-ficheros-servidor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ListboxModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="lista-ficheros-subidos">
       <span>Lista de ficheros en el servidor</span>
+      @if($ficherosSubidosServidorRxResource.isLoading() ){
+      <span>Cargando...</span>
+      } @else{
       <ul>
-        @for (fichero of ficherosSubidosServidor; track fichero.id) {
-        <li (click)="seleccionarFicheroParaProcesar(fichero)">
-          <span>{{ fichero.nombre_fichero }}</span>
-          <span>{{ fichero.ruta_fichero }}</span>
-          <span>{{ fichero.tipo_fichero }}</span>
+        @for (fichero of $ficherosSubidosServidorRxResource.value(); track
+        fichero.id) {
+        <li
+          (click)="seleccionarFicheroParaProcesar(fichero)"
+          class="cursor-pointer bg-gray-100 hover:bg-gray-200 p-4 rounded-lg shadow-sm border border-gray-300 flex flex-col gap-2"
+        >
+          <span class="text-gray-800">
+            <b class="font-bold">Nombre: </b>
+            <span class="capitalize">{{ fichero.nombre_fichero }}</span>
+          </span>
         </li>
         }@empty {
         <li>No hay ficheros subidos</li>
         }
       </ul>
+      }
     </div>
   `,
 })
 export class FicherosServidorComponent {
-  store = inject(Store<FicheroState>);
+  http = inject(HttpClient);
+  readonly store = inject(FicherosStore);
   ficherosSubidosServidor: FicheroSubido[] = [];
 
-  ngOnInit() {
-    this.store.select('ficheros').subscribe((state) => {
-      this.ficherosSubidosServidor = state.listaFicherosServidor;
-    });
-  }
-  ngAfterViewInit() {
-    this.refrescarFicherosServidor();
-  }
-  refrescarFicherosServidor() {
-    this.store.dispatch(FicheroActions.refrescarFicheros());
-  }
+  $ficherosSubidosServidorRxResource = rxResource({
+    loader: (): Observable<FicheroSubido[]> =>
+      this.http.get<FicheroSubido[]>(
+        `${environment.apiUrl + endpoints.utils.files.list}`
+      ),
+  });
+
   seleccionarFicheroParaProcesar($event: FicheroSubido) {
-    this.store.dispatch(FicheroActions.seleccionarFichero($event));
+    this.store.seleccionarFicheroParaProcesar($event);
   }
 }

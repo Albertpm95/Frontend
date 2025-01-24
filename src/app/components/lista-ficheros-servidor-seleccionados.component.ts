@@ -42,7 +42,7 @@ import { FicherosStore } from '@state/ficheros/ficheros.store';
   styles: [],
 })
 export class FicherosServidorSeleccionadosComponent {
-  #ficherosService = inject(FicheroService);
+  readonly #ficherosService = inject(FicheroService);
   readonly store = inject(FicherosStore);
 
   resultado: string = '';

@@ -40,7 +40,7 @@ import { Observable } from 'rxjs';
   `,
 })
 export class FicherosServidorComponent {
-  #ficherosService = inject(FicheroService);
+  readonly #ficherosService = inject(FicheroService);
   readonly store = inject(FicherosStore);
   ficherosSubidosServidor: FicheroSubido[] = [];
 

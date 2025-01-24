@@ -11,7 +11,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { FicheroService } from 'app/services/ficheros.service';
+import { FicheroService } from '@services/ficheros.service';
 import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
 type FicheroState = {
   listaFicherosServidor: FicheroSubido[];

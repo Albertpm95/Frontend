@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
+import { FicheroService } from '@services/ficheros.service';
 import { FicherosStore } from '@state/ficheros/ficheros.store';
 
-import { endpoints, environment } from 'environment';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-ficheros-servidor',
@@ -18,7 +17,7 @@ import { Observable } from 'rxjs';
         >Lista de ficheros en el servidor</span
       >
       @if($ficherosSubidosServidorRxResource.isLoading() ){
-      <span>Cargando...</span>
+      <br /><span>Cargando...</span>
       } @else{
       <ul>
         @for (fichero of $ficherosSubidosServidorRxResource.value(); track
@@ -41,15 +40,13 @@ import { Observable } from 'rxjs';
   `,
 })
 export class FicherosServidorComponent {
-  http = inject(HttpClient);
+  #ficherosService = inject(FicheroService);
   readonly store = inject(FicherosStore);
   ficherosSubidosServidor: FicheroSubido[] = [];
 
   $ficherosSubidosServidorRxResource = rxResource({
     loader: (): Observable<FicheroSubido[]> =>
-      this.http.get<FicheroSubido[]>(
-        `${environment.apiUrl + endpoints.utils.files.list}`
-      ),
+      this.#ficherosService.obtenerFicheros(),
   });
 
   seleccionarFicheroParaProcesar($event: FicheroSubido) {

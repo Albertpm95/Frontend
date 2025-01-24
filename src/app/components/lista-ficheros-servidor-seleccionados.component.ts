@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
+import { FicheroService } from '@services/ficheros.service';
 import { FicherosStore } from '@state/ficheros/ficheros.store';
-
-import { endpoints, environment } from 'environment';
 
 @Component({
   selector: 'app-ficheros-servidor-seleccionados',
@@ -15,6 +13,7 @@ import { endpoints, environment } from 'environment';
       <span class="text-xl font-semibold"
         >Lista de ficheros en el servidor</span
       >
+
       <ul>
         @for (fichero of store.listaFicherosServidorSeleccionados(); track
         fichero.id) {
@@ -32,6 +31,7 @@ import { endpoints, environment } from 'environment';
         <li class="p-text-center">No hay ficheros seleccionados</li>
         }
       </ul>
+
       <button
         label="Enviar lista"
         class="p-button p-button-primary"
@@ -42,8 +42,9 @@ import { endpoints, environment } from 'environment';
   styles: [],
 })
 export class FicherosServidorSeleccionadosComponent {
-  http = inject(HttpClient);
-  store = inject(FicherosStore);
+  #ficherosService = inject(FicheroService);
+  readonly store = inject(FicherosStore);
+
   resultado: string = '';
 
   listaFicherosServidorSeleccionados: FicheroSubido[] = [];
@@ -53,11 +54,8 @@ export class FicherosServidorSeleccionadosComponent {
   }
 
   enviarListaFicherosProcesar() {
-    this.http
-      .post(
-        `${environment.apiUrl + endpoints.utils.files.selectFilesProcesDB}`,
-        this.listaFicherosServidorSeleccionados
-      )
+    this.#ficherosService
+      .enviarListaFicherosProcesar(this.listaFicherosServidorSeleccionados)
       .subscribe((response: any) => {
         console.log('Respuesta:', response);
         if (response.message) this.resultado = response.message;

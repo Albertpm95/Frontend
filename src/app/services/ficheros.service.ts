@@ -16,4 +16,13 @@ export class FicheroService {
       `${environment.apiUrl + endpoints.utils.files.list}`
     );
   }
+
+  enviarListaFicherosProcesar(
+    listaFicherosServidorSeleccionados: FicheroSubido[]
+  ) {
+    return this.http.post(
+      `${environment.apiUrl + endpoints.utils.files.selectFilesProcesDB}`,
+      listaFicherosServidorSeleccionados
+    );
+  }
 }

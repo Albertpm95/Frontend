@@ -25,4 +25,13 @@ export class FicheroService {
       listaFicherosServidorSeleccionados
     );
   }
+
+  ejecutarLinearRegresion() {
+    return this.http.get(
+      `${
+        environment.apiUrl +
+        endpoints.utils.files.uploadYEjecutarLinearRegresion
+      }`
+    );
+  }
 }

@@ -41,10 +41,17 @@ import { FicheroSubido } from '../interfaces/ficheros-subidos.interface';
       >
         Subir
       </button>
+      <button
+        class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 focus:outline-none"
+        (click)="ejecutarLinearRegresion()"
+      >
+        Ejecutar LR sobre CSV
+      </button>
     </div>
 
     <!-- Resultado -->
     <div class="mt-4">
+      <span>Resultado: </span>
       <p class="text-sm text-gray-700">{{ resultado }}</p>
     </div>
   `,
@@ -59,7 +66,6 @@ export class SubidaFicherosComponent {
   ficherosSeleccionadosServidor: FicheroSubido[] = [];
 
   seleccionarFicheroParaSubir(event: any) {
-    console.log('Subiendo fichero...', event);
     this.fichero = event.target.files[0];
   }
 
@@ -70,6 +76,24 @@ export class SubidaFicherosComponent {
 
       this.http
         .post(`${environment.apiUrl + endpoints.utils.files.upload}`, formData)
+        .subscribe((response: any) => {
+          console.log('Respuesta:', response);
+          if (response.message) this.resultado = response.message;
+        });
+    }
+  }
+  ejecutarLinearRegresion() {
+    if (this.fichero) {
+      const formData = new FormData();
+      formData.append('file', this.fichero);
+      this.http
+        .post(
+          `${
+            environment.apiUrl +
+            endpoints.utils.files.uploadYEjecutarLinearRegresion
+          }`,
+          formData
+        )
         .subscribe((response: any) => {
           console.log('Respuesta:', response);
           if (response.message) this.resultado = response.message;

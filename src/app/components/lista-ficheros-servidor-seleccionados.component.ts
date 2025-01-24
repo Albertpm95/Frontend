@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpEventType } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
 import { FicheroService } from '@services/ficheros.service';
@@ -14,7 +15,7 @@ import { FicherosStore } from '@state/ficheros/ficheros.store';
         >Lista de ficheros en el servidor</span
       >
 
-      <ul>
+      <ul class="mt-5">
         @for (fichero of store.listaFicherosServidorSeleccionados(); track
         fichero.id) {
         <li
@@ -34,12 +35,13 @@ import { FicherosStore } from '@state/ficheros/ficheros.store';
 
       <button
         label="Enviar lista"
-        class="p-button p-button-primary"
+        class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 focus:outline-none mt-5"
         (click)="enviarListaFicherosProcesar()"
-      ></button>
+      >
+        Enviar lista de ficheros a procesar
+      </button>
     </div>
   `,
-  styles: [],
 })
 export class FicherosServidorSeleccionadosComponent {
   readonly #ficherosService = inject(FicheroService);
@@ -47,18 +49,30 @@ export class FicherosServidorSeleccionadosComponent {
 
   resultado: string = '';
 
-  listaFicherosServidorSeleccionados: FicheroSubido[] = [];
-
   desSeleccionarFicheroParaProcesar($event: FicheroSubido) {
     this.store.desSeleccionarFicheroParaProcesar($event);
   }
 
   enviarListaFicherosProcesar() {
-    this.#ficherosService
-      .enviarListaFicherosProcesar(this.listaFicherosServidorSeleccionados)
-      .subscribe((response: any) => {
-        console.log('Respuesta:', response);
-        if (response.message) this.resultado = response.message;
-      });
+    const listaFicherosServidorSeleccionados =
+      this.store.listaFicherosServidorSeleccionados();
+    if (listaFicherosServidorSeleccionados.length === 2)
+      this.#ficherosService
+        .enviarListaFicherosProcesar(listaFicherosServidorSeleccionados)
+        .subscribe((event: any) => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              console.log(
+                'Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes'
+              );
+              break;
+            case HttpEventType.Response:
+              console.log('Finished uploading!');
+              break;
+          }
+
+          console.log('Respuesta:', event);
+          if (event.message) this.resultado = event.message;
+        });
   }
 }

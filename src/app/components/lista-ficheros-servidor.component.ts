@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
       @if($ficherosSubidosServidorRxResource.isLoading() ){
       <br /><span>Cargando...</span>
       } @else{
-      <ul>
+      <ul class="mt-5">
         @for (fichero of $ficherosSubidosServidorRxResource.value(); track
         fichero.id) {
         <li

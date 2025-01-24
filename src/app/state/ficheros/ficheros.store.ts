@@ -74,5 +74,8 @@ export const FicherosStore = signalStore(
           state.listaFicherosServidorSeleccionados.filter((f) => f !== fichero),
       }));
     },
+    recuperarListaFicherosParaProcesar() {
+      return store.listaFicherosServidorSeleccionados();
+    },
   }))
 );

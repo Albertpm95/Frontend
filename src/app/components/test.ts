@@ -10,12 +10,12 @@ import { SubidaFicherosComponent } from './subida-fichero.component';
           <app-ficheros-servidor></app-ficheros-servidor>
         </div>
 
-        <div class=" border-gray-600  mt-5 p-4">
+        <div class=" border-gray-600 p-4">
           <app-ficheros-servidor-seleccionados></app-ficheros-servidor-seleccionados>
         </div>
       </div>
 
-      <div class=" border-gray-600  p-4">
+      <div class=" border-gray-600 mt-5 p-4">
         <div class="text-lg font-semibold mb-2">Subir Nuevo Fichero</div>
         <div>
           <app-subida-fichero></app-subida-fichero>

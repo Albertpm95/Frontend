@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { endpoints, environment } from '../../environment';
-import { FicheroSubido } from '../interfaces/ficheros-subidos.interface';
+import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
+import { endpoints, environment } from 'environment';
+import { VisorImagenComponent } from './imagen.component';
 @Component({
   selector: 'app-subida-fichero',
-  imports: [CommonModule],
+  imports: [CommonModule, VisorImagenComponent],
   template: `
     <div class="space-y-4">
       <!-- Seleccionar fichero -->
@@ -48,6 +49,8 @@ import { FicheroSubido } from '../interfaces/ficheros-subidos.interface';
         Ejecutar LR sobre CSV
       </button>
     </div>
+    @if(imageData){
+    <app-visor-imagen [imageData]="imageData"></app-visor-imagen>}
 
     <!-- Resultado -->
     <div class="mt-4">
@@ -64,6 +67,8 @@ export class SubidaFicherosComponent {
   resultado: string = '';
   ficherosSubidosServidor: FicheroSubido[] = [];
   ficherosSeleccionadosServidor: FicheroSubido[] = [];
+
+  imageData = undefined;
 
   seleccionarFicheroParaSubir(event: any) {
     this.fichero = event.target.files[0];
@@ -90,13 +95,14 @@ export class SubidaFicherosComponent {
         .post(
           `${
             environment.apiUrl +
-            endpoints.utils.files.uploadYEjecutarLinearRegresion
+            endpoints.linear_regresion.uploadYEjecutarLinearRegresion
           }`,
           formData
         )
         .subscribe((response: any) => {
           console.log('Respuesta:', response);
           if (response.message) this.resultado = response.message;
+          this.imageData = response.image;
         });
     }
   }

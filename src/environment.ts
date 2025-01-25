@@ -10,8 +10,12 @@ export const endpoints = {
       upload: '/utils/files/upload',
       list: '/utils/files/list',
       selectFilesProcesDB: '/utils/files/select-files-proces-db',
-      uploadYEjecutarLinearRegresion:
-        '/linear_regression/upload-and-linear-regression',
     },
+  },
+  linear_regresion: {
+    uploadYEjecutarLinearRegresion:
+      '/linear_regression/upload-and-linear-regression',
+    upload_pixels_background_wavelength:
+      '/linear_regression/upload-pixels-background-wavelength',
   },
 };

@@ -30,7 +30,7 @@ export class FicheroService {
     return this.http.get(
       `${
         environment.apiUrl +
-        endpoints.utils.files.uploadYEjecutarLinearRegresion
+        endpoints.linear_regresion.uploadYEjecutarLinearRegresion
       }`
     );
   }

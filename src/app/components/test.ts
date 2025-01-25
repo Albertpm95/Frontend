@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FicherosServidorSeleccionadosComponent } from './lista-ficheros-servidor-seleccionados.component';
 import { FicherosServidorComponent } from './lista-ficheros-servidor.component';
+import { Subida3FicherosComponent } from './subida-3-ficheros.component';
 import { SubidaFicherosComponent } from './subida-fichero.component';
 @Component({
   template: `
@@ -20,6 +21,7 @@ import { SubidaFicherosComponent } from './subida-fichero.component';
         <div>
           <app-subida-fichero></app-subida-fichero>
         </div>
+        <app-subida-3-fichero></app-subida-3-fichero>
       </div>
     </div>
   `,
@@ -49,6 +51,7 @@ import { SubidaFicherosComponent } from './subida-fichero.component';
     SubidaFicherosComponent,
     FicherosServidorComponent,
     FicherosServidorSeleccionadosComponent,
+    Subida3FicherosComponent,
   ],
 })
 export class TestComponent {}

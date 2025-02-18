@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TestDatosDirectosComponent } from './datos-directos.component';
 import { FicherosServidorSeleccionadosComponent } from './lista-ficheros-servidor-seleccionados.component';
 import { FicherosServidorComponent } from './lista-ficheros-servidor.component';
 import { Subida3FicherosComponent } from './subida-3-ficheros.component';
 import { SubidaFicherosComponent } from './subida-fichero.component';
 @Component({
   template: `
-    <div class="overflow-x-auto flex flex-col items-center mt-5">
+    <div>
+      <h1>Componentes para testar</h1>
+      <app-test-datos-directos></app-test-datos-directos>
+    </div>
+    <!-- <div class="overflow-x-auto flex flex-col items-center mt-5">
       <div class="grid grid-cols-2 gap-6">
         <div class=" border-gray-600  p-4">
           <app-ficheros-servidor></app-ficheros-servidor>
@@ -23,7 +28,7 @@ import { SubidaFicherosComponent } from './subida-fichero.component';
         </div>
         <app-subida-3-fichero></app-subida-3-fichero>
       </div>
-    </div>
+    </div> -->
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,6 +57,7 @@ import { SubidaFicherosComponent } from './subida-fichero.component';
     FicherosServidorComponent,
     FicherosServidorSeleccionadosComponent,
     Subida3FicherosComponent,
+    TestDatosDirectosComponent,
   ],
 })
 export class TestComponent {}

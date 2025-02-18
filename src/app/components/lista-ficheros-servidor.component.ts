@@ -6,10 +6,11 @@ import { FicheroService } from '@services/ficheros.service';
 import { FicherosStore } from '@state/ficheros/ficheros.store';
 
 import { Observable } from 'rxjs';
+import { VisorImagenComponent } from './imagen.component';
 @Component({
   selector: 'app-ficheros-servidor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, VisorImagenComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>
@@ -35,6 +36,13 @@ import { Observable } from 'rxjs';
         <li>No hay ficheros subidos</li>
         }
       </ul>
+      } @if(!$nnLR.isLoading()){
+      {{ $nnLR.value() }}
+      <!-- @if($nnLR.value().chart_image_base64){
+      <app-visor-imagen
+        [imageData]="$nnLR.value().chart_image_base64"
+      ></app-visor-imagen
+      >} -->
       }
     </div>
   `,
@@ -47,6 +55,11 @@ export class FicherosServidorComponent {
   $ficherosSubidosServidorRxResource = rxResource({
     loader: (): Observable<FicheroSubido[]> =>
       this.#ficherosService.obtenerFicheros(),
+  });
+
+  $nnLR = rxResource({
+    loader: (): Observable<any> =>
+      this.#ficherosService.ejecutarNNLinearRegresion(),
   });
 
   seleccionarFicheroParaProcesar($event: FicheroSubido) {

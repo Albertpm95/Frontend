@@ -1,5 +1,3 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -15,27 +13,59 @@
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "ES2024",
     "module": "ES2022",
     "baseUrl": "./src",
     "paths": {
-      "@interfaces/*": ["app/interfaces/*"],
-      "@state/*": ["app/state/*"],
-      "@services/*": ["app/services/*"],
-      "@env/*": ["environments/*"],
-      "@core/*": ["app/core/*"],
-      "@shared/*": ["app/shared/*"],
-      "@modules/*": ["app/modules/*"],
-      "@models/*": ["app/models/*"],
-      "@guards/*": ["app/guards/*"],
-      "@interceptors/*": ["app/interceptors/*"],
-      "@pipes/*": ["app/pipes/*"],
-      "@directives/*": ["app/directives/*"],
-      "@utils/*": ["app/utils/*"],
-      "@config/*": ["app/config/*"],
-      "@assets/*": ["assets/*"],
-      "@app/*": ["app/*"]
-    },
+      "@interfaces/*": [
+        "app/interfaces/*"
+      ],
+      "@state/*": [
+        "app/state/*"
+      ],
+      "@services/*": [
+        "app/services/*"
+      ],
+      "@env/*": [
+        "environments/*"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@modules/*": [
+        "app/modules/*"
+      ],
+      "@models/*": [
+        "app/models/*"
+      ],
+      "@guards/*": [
+        "app/guards/*"
+      ],
+      "@interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@pipes/*": [
+        "app/pipes/*"
+      ],
+      "@directives/*": [
+        "app/directives/*"
+      ],
+      "@utils/*": [
+        "app/utils/*"
+      ],
+      "@config/*": [
+        "app/config/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@app/*": [
+        "app/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

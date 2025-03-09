@@ -6,3 +6,8 @@ export interface FicheroSubido {
   fecha_subida: string;
   usuario_subida: string;
 }
+
+export interface Fichero extends File {
+  id?: number;
+  extension: string;
+}

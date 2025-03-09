@@ -1,15 +1,7 @@
 import { computed, effect, inject } from '@angular/core';
-import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
+import { FicheroSubido } from '@interfaces/ficheros.interface';
 import { tapResponse } from '@ngrx/operators';
-import {
-  getState,
-  patchState,
-  signalStore,
-  withComputed,
-  withHooks,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import { getState, patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { FicheroService } from '@services/external/ficheros.service';
 import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
@@ -49,33 +41,28 @@ export const FicherosStore = signalStore(
         switchMap(() => {
           return ficherosService.obtenerFicheros().pipe(
             tapResponse({
-              next: (ficheros: FicheroSubido[]) =>
-                patchState(store, { listaFicherosServidor: ficheros }),
+              next: (ficheros: FicheroSubido[]) => patchState(store, { listaFicherosServidor: ficheros }),
               error: console.error,
               finalize: () => patchState(store, { isLoading: false }),
-            })
+            }),
           );
-        })
-      )
+        }),
+      ),
     ),
     seleccionarFicheroParaProcesar(fichero: FicheroSubido) {
       if (!store.listaFicherosServidorSeleccionados().includes(fichero)) {
         patchState(store, (state) => ({
-          listaFicherosServidorSeleccionados: [
-            ...state.listaFicherosServidorSeleccionados,
-            fichero,
-          ],
+          listaFicherosServidorSeleccionados: [...state.listaFicherosServidorSeleccionados, fichero],
         }));
       }
     },
     desSeleccionarFicheroParaProcesar(fichero: FicheroSubido) {
       patchState(store, (state) => ({
-        listaFicherosServidorSeleccionados:
-          state.listaFicherosServidorSeleccionados.filter((f) => f !== fichero),
+        listaFicherosServidorSeleccionados: state.listaFicherosServidorSeleccionados.filter((f) => f !== fichero),
       }));
     },
     recuperarListaFicherosParaProcesar() {
       return store.listaFicherosServidorSeleccionados();
     },
-  }))
+  })),
 );

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpEventType } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
-import { FicheroService } from '@services/ficheros.service';
+import { FicheroService } from '@services/external/ficheros.service';
 import { FicherosStore } from '@state/ficheros/ficheros.store';
 
 @Component({

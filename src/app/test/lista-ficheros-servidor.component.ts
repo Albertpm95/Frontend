@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FicheroSubido } from '@interfaces/ficheros-subidos.interface';
-import { FicheroService } from '@services/ficheros.service';
+import { FicheroService } from '@services/external/ficheros.service';
 import { FicherosStore } from '@state/ficheros/ficheros.store';
 
 import { Observable } from 'rxjs';

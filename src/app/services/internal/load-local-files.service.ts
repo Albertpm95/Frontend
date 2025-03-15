@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoadLocalFilesService {
-  constructor() {}
-
   loadTxtFile(file: File): Observable<string> {
     const fileReader = new FileReader();
     const fileObservable = new Observable<string>((observer) => {
       fileReader.onload = () => {
-        observer.next(fileReader.result as string);
+        let content = fileReader.result as string;
+        content = content.replace(/,/g, ', ');
+        observer.next(content);
         observer.complete();
       };
       fileReader.onerror = (error) => {

@@ -7,5 +7,6 @@
   "useTabs": false,
   "htmlWhitespaceSensitivity": "css",
   "singleAttributePerLine": false,
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "embeddedLanguageFormatting": "auto"
 }

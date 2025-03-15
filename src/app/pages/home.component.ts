@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
-import { Fichero } from '@interfaces/ficheros.interface';
+import { Component, inject } from '@angular/core';
+import { InputDatosManagerComponent } from '@modules/input-datos-manager.component';
+import { FicheroService } from '@services/external/ficheros.service';
 
 @Component({
   selector: 'app-home',
-  imports: [],
-  styles: [``],
-  template: ``,
+  imports: [InputDatosManagerComponent],
+
+  template: `<div class="flex flex-col gap-4">
+    <app-input-datos-manager [tipo]="'INDEPENDIENTE'"></app-input-datos-manager>
+    <!-- <app-input-datos-manager [tipo]="'DEPENDIENTE'"></app-input-datos-manager> -->
+    <app-input-datos-manager [tipo]="'PLOT'"></app-input-datos-manager>
+    <button (click)="enviar()">Enviar</button>
+  </div>`,
 })
 export class HomeComponent {
-  ficheros: { id: number; fichero: Fichero | undefined }[] = [
-    { id: 0, fichero: undefined },
-  ];
-
+  readonly #ficheroService = inject(FicheroService);
   public enviar() {
-    console.log('Ficheros seleccionados ', this.ficheros);
+    this.#ficheroService
+      .ejecutarRegresionLinealMultiplesFicherosConcatenados()
+      .subscribe();
   }
 }

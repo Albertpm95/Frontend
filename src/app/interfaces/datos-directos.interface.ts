@@ -16,8 +16,13 @@ export interface DatosDirectosResult {
   intercept?: number[];
   r_squared?: number;
   r2?: number | null;
-  predictions?: any[];
+  predictions?: unknown[];
   method?: string;
   file_path?: string | null;
   plot?: string;
+}
+
+export interface RespuestaRegresionConcatenadaPlot {
+  imagen_ploteada: string;
+  matriz_concatenada: number[];
 }

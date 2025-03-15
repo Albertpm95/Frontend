@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { LoadLocalFilesService } from '@services/internal/load-local-files.service';
 
 @Component({
   selector: 'input-datos',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="flex flex-col p-3">
       <div class="flex flex-col">
         <label for="file" class="block text-gray-700 text-sm font-bold mb-2"
-          >Selecciona un fichero con variables independientes:</label
+          >Selecciona un fichero:</label
         >
         <input
           id="file"
-          class="hidden"
+          class="block text-blue-500 text-sm font-bold mb-2 cursor-pointer"
           type="file"
-          (change)="seleccionarFicheroVariablesIndependientes($event)" />
+          (change)="seleccionarFichero($event)" />
       </div>
       <div class="flex flex-col">
         <label class="block text-gray-700 text-sm font-bold mb-2">Datos leidos:</label>
@@ -28,18 +27,22 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     </div>
   `,
 })
-export class FileIndependientesComponent {
-  ficheroVariables: File | undefined = undefined;
+export class FileSelectorComponent {
+  loadLocalFilesService = inject(LoadLocalFilesService);
 
-  matriz: number[][] | undefined = [];
+  fichero: File | undefined = undefined;
+  matrizTexto = new FormControl<string>('');
 
-  matrizTexto = new FormControl([]);
-
-  ficheroSubido = output<File>();
+  onSelectedFile = output<File>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  seleccionarFicheroVariablesIndependientes($event: any) {
-    this.ficheroVariables = $event.target?.files?.[0] as File;
-    if (this.ficheroVariables) this.ficheroSubido.emit(this.ficheroVariables);
+  seleccionarFichero($event: any) {
+    this.fichero = $event.target?.files?.[0] as File;
+    if (this.fichero) this.onSelectedFile.emit(this.fichero);
+    this.loadLocalFilesService
+      .loadTxtFile(this.fichero)
+      .subscribe((datosLeidos: string) => {
+        this.matrizTexto.setValue(datosLeidos);
+      });
   }
 }

@@ -1,20 +1,19 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { FileIndependientesComponent } from '@app/components/input-datos.component';
+import { Component, input } from '@angular/core';
+import { FileSelectorComponent } from '@app/components/input-datos.component';
 import { Fichero } from '@interfaces/ficheros.interface';
 
+type VariableOptions = 'DEPENDIENTE' | 'INDEPENDIENTE' | 'PLOT';
+
 @Component({
-  selector: 'app-home',
-  imports: [FileIndependientesComponent],
-  styles: [``],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-input-datos-manager',
+  imports: [FileSelectorComponent],
   template: `
     <div>
-      <div class="grid md:grid-cols-2 grid-cols-4 gap-4">
+      <div class="grid xs:grid-cols-2 grid-cols-4 gap-4">
         @for (fichero of ficheros; track fichero.id; let index = $index) {
           <input-datos
             class="bg-gray-200 auto cursor-pointer border-solid"
-            (ficheroSubido)="ficheroSubido($event, index)"></input-datos>
+            (onSelectedFile)="selectFile($event, index)"></input-datos>
         }
         @if (ficheros.length < 4) {
           <div
@@ -27,29 +26,22 @@ import { Fichero } from '@interfaces/ficheros.interface';
           </div>
         }
       </div>
-
-      <button (click)="enviar()">Enviar</button>
     </div>
   `,
 })
-export class InputDatosModuleComponent {
-  tipo = input<string>();
+export class InputDatosManagerComponent {
+  tipo = input.required<VariableOptions>();
   ficheros: { id: number; fichero: Fichero | undefined }[] = [
     { id: 0, fichero: undefined },
   ];
 
-  public ficheroSubido(event: File, index: number) {
-    if (this.ficheros)
-      this.ficheros[index + 1] = { id: index + 1, fichero: event as Fichero };
+  public selectFile(event: File, index: number) {
+    if (this.ficheros) this.ficheros[index] = { id: index, fichero: event as Fichero };
   }
 
   public addFicheroExtra() {
     if (this.ficheros && this.ficheros.length < 4) {
       this.ficheros.push({ id: this.ficheros.length, fichero: undefined });
     }
-  }
-
-  public enviar() {
-    console.log('Ficheros seleccionados ', this.ficheros);
   }
 }

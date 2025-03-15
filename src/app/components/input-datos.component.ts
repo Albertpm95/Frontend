@@ -28,7 +28,7 @@ import { LoadLocalFilesService } from '@services/internal/load-local-files.servi
   `,
 })
 export class FileSelectorComponent {
-  loadLocalFilesService = inject(LoadLocalFilesService);
+  private readonly loadLocalFilesService = inject(LoadLocalFilesService);
 
   fichero: File | undefined = undefined;
   matrizTexto = new FormControl<string>('');
@@ -38,6 +38,7 @@ export class FileSelectorComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   seleccionarFichero($event: any) {
     this.fichero = $event.target?.files?.[0] as File;
+
     if (this.fichero) this.onSelectedFile.emit(this.fichero);
     this.loadLocalFilesService
       .loadTxtFile(this.fichero)

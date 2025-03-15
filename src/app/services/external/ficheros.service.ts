@@ -1,11 +1,9 @@
-// services/fichero.service.ts
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Fichero } from '@interfaces/ficheros.interface';
+import { Injectable, inject } from '@angular/core';
 import { FilesListService } from '@services/internal/files-list.service';
 import { endpoints } from 'endpoints';
 import { environment } from 'environment';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,19 +11,21 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class FicheroService {
   #filesListService = inject(FilesListService);
   constructor(private readonly http: HttpClient) {}
-
   ejecutarRegresionLinealMultiplesFicherosConcatenados(): Observable<unknown> {
     const formData = new FormData();
-    const files = this.#filesListService.getFiles();
+    const files: { ficheros_matrices: File[]; ficheros_plot: File[] } =
+      this.#filesListService.getFiles();
 
-    // Añadir archivos de matrices con un prefijo claro
-    files.ficheros_matrices.forEach((file: Fichero, index: number) => {
-      formData.append(`matrices_file_${index}`, file, file.name);
+    files.ficheros_matrices.forEach((fichero: File) => {
+      if (fichero) {
+        formData.append('matrices', fichero);
+      }
     });
 
-    // Añadir archivos de plot con un prefijo claro
-    files.ficheros_plot.forEach((file: Fichero, index: number) => {
-      formData.append(`plot_file_${index}`, file, file.name);
+    files.ficheros_plot.forEach((fichero: File) => {
+      if (fichero) {
+        formData.append('plots', fichero);
+      }
     });
 
     return this.http

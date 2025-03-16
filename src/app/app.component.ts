@@ -5,9 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   standalone: true,
-  template: `
-    <div class="min-h-screen bg-gray-50 p-6 h-screen"><router-outlet /></div>
-  `,
+  template: ` <div class="min-h-screen h-screen"><router-outlet /></div> `,
 })
 export class AppComponent {
   title = 'Frontend';

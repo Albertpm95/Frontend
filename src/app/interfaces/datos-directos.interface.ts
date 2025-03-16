@@ -7,7 +7,7 @@ export interface DatosDirectos {
     variables_dependientes?: number[];
     file_variables_dependientes?: FormData;
   };
-  method: 'NNLS' | 'OLS' | 'CLS' | string;
+  method: 'NNLS' | 'OLS' | 'CLS' | 'PLOT';
   test_size?: number | null;
   random_state?: number | null;
 }
@@ -25,4 +25,8 @@ export interface DatosDirectosResult {
 export interface RespuestaRegresionConcatenadaPlot {
   imagen_ploteada: string;
   matriz_concatenada: number[];
+}
+
+export interface ContenidoFicheroMat {
+  columnas: string[];
 }

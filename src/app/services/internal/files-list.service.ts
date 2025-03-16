@@ -7,6 +7,13 @@ export class FilesListService {
   private readonly ficheros_matrices: File[] = [];
   private readonly ficheros_plot: File[] = [];
 
+  eliminarUltimoFicheroMatriz() {
+    this.ficheros_matrices.pop();
+  }
+  eliminarUltimoFicheroPlot() {
+    this.ficheros_plot.pop();
+  }
+
   setFicheroMatriz(fichero: File): void {
     if (fichero) this.ficheros_matrices.push(fichero);
   }

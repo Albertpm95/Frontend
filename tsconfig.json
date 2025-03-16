@@ -18,6 +18,10 @@
     "target": "ES2024",
     "module": "ES2022",
     "baseUrl": "./src",
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "paths": {
       "@interfaces/*": [
         "app/interfaces/*"

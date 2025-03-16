@@ -7,9 +7,9 @@ import { LoadLocalFilesService } from '@services/internal/load-local-files.servi
   selector: 'input-datos',
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="flex flex-col p-3">
-      <div class="flex flex-col">
-        <label for="file" class="block text-gray-700 text-sm font-bold mb-2"
+    <div class="flex flex-col gap-4 p-4 m-4 bg-gray-200 rounded-lg shadow">
+      <div class="flex flex-col gap-4 p-2">
+        <label for="file" class="text-gray-700 text-sm font-medium"
           >Selecciona un fichero:</label
         >
         <input
@@ -18,11 +18,11 @@ import { LoadLocalFilesService } from '@services/internal/load-local-files.servi
           type="file"
           (change)="seleccionarFichero($event)" />
       </div>
-      <div class="flex flex-col">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Datos leidos:</label>
+      <div class="flex flex-col  items-center gap-4  bg-gray-100">
+        <label class="text-gray-700 text-sm font-medium">Datos leidos:</label>
         <textarea
           [formControl]="matrizTexto"
-          class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y min-h-[100px]"></textarea>
+          class="w-full p-3 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y min-h-[100px]"></textarea>
       </div>
     </div>
   `,

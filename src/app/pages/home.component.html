@@ -16,7 +16,9 @@
       <input
         id="train_size"
         type="number"
+        step="0.01"
         min="0"
+        max="1"
         [formControl]="train_size"
         class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
     </div>
@@ -79,12 +81,18 @@
   <div class="flex gap-6">
     <div class="flex flex-col gap-4 p-2">
       <app-input-datos-manager [tipo]="'INDEPENDIENTE'"></app-input-datos-manager>
-      <app-input-datos-manager [tipo]="'DEPENDIENTE'"></app-input-datos-manager>
+      <!-- <app-input-datos-manager [tipo]="'DEPENDIENTE'"></app-input-datos-manager> -->
       <app-input-datos-manager [tipo]="'PLOT'"></app-input-datos-manager>
       <app-input-mat-manager></app-input-mat-manager>
     </div>
 
     <div class="flex flex-row justify-items-center bg-gray-100 rounded-lg shadow">
+      <ul>
+        @for (error of errors; track error) {
+          <li>{{ error }}</li>
+        }
+      </ul>
+
       <img alt="Resultado del plot" [src]="[imagen]" fill placeholder />
     </div>
   </div>

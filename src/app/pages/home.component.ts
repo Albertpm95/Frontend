@@ -32,11 +32,11 @@ export class HomeComponent {
 	public imagen: string | undefined;
 	public imagen2: string | undefined;
 	public test_size = new FormControl(undefined, {
-		validators: [Validators.min(0), Validators.max(0)],
+		validators: [Validators.min(0), Validators.max(1)],
 		asyncValidators: [this.validateTestAndTrainSize()],
 	});
 	public train_size = new FormControl(undefined, {
-		validators: [Validators.min(0), Validators.max(0)],
+		validators: [Validators.min(0), Validators.max(1)],
 		asyncValidators: this.validateTestAndTrainSize(),
 	});
 	public random_state = new FormControl(undefined);
@@ -73,8 +73,10 @@ export class HomeComponent {
 				console.log("Respuesta", resultadosEjecucion);
 				if (resultadosEjecucion.imagen_ploteada)
 					this.imagen = `data:image/png;base64,${resultadosEjecucion.imagen_ploteada}`;
-				if (resultadosEjecucion.matriz_original_ploteada)
-					this.imagen2 = `data:image/png;base64,${resultadosEjecucion.matriz_original_ploteada}`;
+				if (resultadosEjecucion.plot_datos_originales)
+					this.imagen2 = `data:image/png;base64,${resultadosEjecucion.plot_datos_originales}`;
+				console.log("Imagen", this.imagen);
+				console.log("Imagen2", this.imagen2);
 				this.#cdr.detectChanges();
 			});
 	}

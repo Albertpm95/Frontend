@@ -4,8 +4,15 @@ import { Injectable } from "@angular/core";
 	providedIn: "root",
 })
 export class FilesListService {
-	private readonly ficheros_matrices: File[] = [];
-	private readonly ficheros_plot: File[] = [];
+	private ficheros_matrices: File[] = [];
+	private ficheros_plot: File[] = [];
+
+	eliminarListaMatriz() {
+		this.ficheros_matrices = [];
+	}
+	eliminarListaPlot() {
+		this.ficheros_plot = [];
+	}
 
 	eliminarUltimoFicheroMatriz() {
 		this.ficheros_matrices.pop();

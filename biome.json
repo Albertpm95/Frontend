@@ -11,7 +11,10 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"attributePosition": "auto",
+		"bracketSpacing": true,
+		"lineWidth": 120
 	},
 	"organizeImports": {
 		"enabled": true
@@ -19,7 +22,7 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"all": true
 		}
 	},
 	"javascript": {

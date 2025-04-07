@@ -1,14 +1,14 @@
-import { Component, inject, input } from '@angular/core';
-import { FileSelectorComponent } from '@app/components/input-datos.component';
-import { Fichero } from '@interfaces/ficheros.interface';
-import { FilesListService } from '@services/internal/files-list.service';
+import { Component, inject, input } from "@angular/core";
+import { FileSelectorComponent } from "@app/components/input-datos.component";
+import type { Fichero } from "@interfaces/ficheros.interface";
+import { FilesListService } from "@services/internal/files-list.service";
 
-type VariableOptions = 'DEPENDIENTE' | 'INDEPENDIENTE' | 'PLOT' | 'MAT';
+type VariableOptions = "DEPENDIENTE" | "INDEPENDIENTE" | "PLOT" | "MAT";
 
 @Component({
-  selector: 'app-input-datos-manager',
-  imports: [FileSelectorComponent],
-  template: `
+	selector: "app-input-datos-manager",
+	imports: [FileSelectorComponent],
+	template: `
     <div class="grid xs:grid-cols-2 grid-cols-4 gap-4 bg-gray-100 rounded-lg shadow">
       @for (fichero of ficheros; track fichero.id; let index = $index) {
         <input-datos
@@ -32,44 +32,44 @@ type VariableOptions = 'DEPENDIENTE' | 'INDEPENDIENTE' | 'PLOT' | 'MAT';
   `,
 })
 export class InputDatosManagerComponent {
-  readonly #filesListService = inject(FilesListService);
-  tipo = input.required<VariableOptions>();
-  ficheros: { id: number; fichero: Fichero | undefined }[] = [
-    { id: 0, fichero: undefined },
-  ];
+	readonly #filesListService = inject(FilesListService);
+	tipo = input.required<VariableOptions>();
+	ficheros: { id: number; fichero: Fichero | undefined }[] = [
+		{ id: 0, fichero: undefined },
+	];
 
-  public limpiarUltimoFichero() {
-    switch (this.tipo()) {
-      case 'INDEPENDIENTE':
-        this.#filesListService.eliminarUltimoFicheroMatriz();
-        this.ficheros.pop();
-        break;
-      case 'PLOT':
-        this.#filesListService.eliminarUltimoFicheroPlot();
-        this.ficheros.pop();
-        break;
-      default:
-        break;
-    }
-    console.log('Eliminado ultimo ', this.ficheros);
-  }
-  public selectFile(event: File) {
-    if (event)
-      switch (this.tipo()) {
-        case 'INDEPENDIENTE':
-          this.#filesListService.setFicheroMatriz(event);
-          break;
-        case 'PLOT':
-          this.#filesListService.setFicheroPlot(event);
-          break;
-        default:
-          break;
-      }
-  }
+	public limpiarUltimoFichero() {
+		switch (this.tipo()) {
+			case "INDEPENDIENTE":
+				this.#filesListService.eliminarUltimoFicheroMatriz();
+				this.ficheros.pop();
+				break;
+			case "PLOT":
+				this.#filesListService.eliminarUltimoFicheroPlot();
+				this.ficheros.pop();
+				break;
+			default:
+				break;
+		}
+		console.log("Eliminado ultimo ", this.ficheros);
+	}
+	public selectFile(event: File) {
+		if (event)
+			switch (this.tipo()) {
+				case "INDEPENDIENTE":
+					this.#filesListService.setFicheroMatriz(event);
+					break;
+				case "PLOT":
+					this.#filesListService.setFicheroPlot(event);
+					break;
+				default:
+					break;
+			}
+	}
 
-  public addFicheroExtra() {
-    if (this.ficheros && this.ficheros.length < 4) {
-      this.ficheros.push({ id: this.ficheros.length, fichero: undefined });
-    }
-  }
+	public addFicheroExtra() {
+		if (this.ficheros && this.ficheros.length < 4) {
+			this.ficheros.push({ id: this.ficheros.length, fichero: undefined });
+		}
+	}
 }

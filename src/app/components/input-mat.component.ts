@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
+import { Component, output } from "@angular/core";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-  selector: 'input-mat',
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+	selector: "input-mat",
+	imports: [CommonModule, ReactiveFormsModule],
+	template: `
     <div class="flex flex-col p-3">
       <div class="flex flex-col">
         <label for="file" class="block text-gray-700 text-sm font-bold mb-2"
@@ -22,15 +22,15 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   `,
 })
 export class MatFileSelectorComponent {
-  fichero: File | undefined = undefined;
-  matrizTexto = new FormControl<string>('');
+	fichero: File | undefined = undefined;
+	matrizTexto = new FormControl<string>("");
 
-  onMatSelectedFile = output<File>();
+	onMatSelectedFile = output<File>();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  seleccionarFichero($event: any) {
-    this.fichero = $event.target?.files?.[0] as File;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	seleccionarFichero($event: any) {
+		this.fichero = $event.target?.files?.[0] as File;
 
-    if (this.fichero) this.onMatSelectedFile.emit(this.fichero);
-  }
+		if (this.fichero) this.onMatSelectedFile.emit(this.fichero);
+	}
 }

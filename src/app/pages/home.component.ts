@@ -8,6 +8,7 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from "@angular/forms";
+import type { RegresionMultipleResponse } from "@interfaces/regresion-multiple-response.interface";
 import { FicheroService } from "@services/external/ficheros.service";
 import { UtilsService } from "@services/internal/utils.service";
 import { type Observable, catchError, throwError } from "rxjs";
@@ -68,7 +69,7 @@ export class HomeComponent {
 					return throwError(() => error);
 				}),
 			)
-			.subscribe((resultadosEjecucion) => {
+			.subscribe((resultadosEjecucion: RegresionMultipleResponse) => {
 				console.log("Respuesta", resultadosEjecucion);
 				if (resultadosEjecucion.imagen_ploteada)
 					this.imagen = `data:image/png;base64,${resultadosEjecucion.imagen_ploteada}`;

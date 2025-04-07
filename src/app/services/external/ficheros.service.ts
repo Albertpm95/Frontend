@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
+import type { RegresionMultipleResponse } from "@interfaces/regresion-multiple-response.interface";
 import { FilesListService } from "@services/internal/files-list.service";
 import { endpoints } from "endpoints";
 import { environment } from "environment";
@@ -19,7 +20,7 @@ export class FicheroService {
 		stratify: string | undefined,
 		intercept: boolean | undefined,
 		method: string | undefined,
-	): Observable<object> {
+	): Observable<RegresionMultipleResponse> {
 		const formData = new FormData();
 		if (test_size) formData.append("test_size", test_size.toString());
 		if (train_size) formData.append("train_size", train_size.toString());
@@ -44,7 +45,7 @@ export class FicheroService {
 			}
 		}
 
-		return this.#http.post<object>(
+		return this.#http.post<RegresionMultipleResponse>(
 			`${environment.apiUrl}${endpoints.linear_regresion.concatenacion_plot}`,
 			formData,
 		);

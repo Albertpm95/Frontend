@@ -22,13 +22,13 @@ export class FicheroService {
 		method: string | undefined,
 	): Observable<RegresionMultipleResponse> {
 		const formData = new FormData();
+		if (method) formData.append("method", method);
 		if (test_size) formData.append("test_size", test_size.toString());
 		if (train_size) formData.append("train_size", train_size.toString());
 		if (random_state) formData.append("random_state", random_state.toString());
 		if (shuffle) formData.append("shuffle", shuffle.toString());
 		if (stratify) formData.append("stratify", stratify.toString());
 		if (intercept) formData.append("intercept", intercept.toString());
-		if (method) formData.append("method", method);
 
 		const files: { ficheros_matrices: File[]; ficheros_plot: File[] } =
 			this.#filesListService.getFiles();

@@ -96,11 +96,25 @@
     </button>
   </div>
 
-  <div class="flex gap-6">
-    <div
-      class="flex flex-col gap-4 p-2"
-      [hidden]="imagen || imagen2 ? true : false"
-    >
+  <div class="flex flex-col gap-6">
+    @if(imagen){
+    <img
+      id="resultados-plot"
+      alt="Resultado del plot"
+      [src]="[imagen]"
+      fill
+      placeholder
+    />
+    } @if(imagen2){
+    <img
+      id="resultados-originales"
+      alt="Plot datos originales"
+      [src]="[imagen2]"
+      fill
+      placeholder
+    />
+    }
+    <div class="flex flex-col gap-4 p-2">
       <app-input-datos-manager
         [tipo]="'INDEPENDIENTE'"
       ></app-input-datos-manager>
@@ -110,30 +124,13 @@
     </div>
 
     <div
-      class="flex flex-row justify-items-center bg-gray-100 rounded-lg shadow"
+      class="flex flex-col justify-items-center bg-gray-100 rounded-lg shadow"
     >
       <ul>
         @for (error of errors; track error) {
         <li>{{ error }}</li>
         }
       </ul>
-      @if(imagen){
-      <img
-        id="resultados-plot"
-        alt="Resultado del plot"
-        [src]="[imagen]"
-        fill
-        placeholder
-      />
-      } @if(imagen2){
-      <img
-        id="resultados-originales"
-        alt="Plot datos originales"
-        [src]="[imagen2]"
-        fill
-        placeholder
-      />
-      }
     </div>
   </div>
 </div>

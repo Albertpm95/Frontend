@@ -75,19 +75,9 @@ export class HomeComponent {
 					this.imagen = `data:image/png;base64,${resultadosEjecucion.imagen_ploteada}`;
 				if (resultadosEjecucion.plot_datos_originales)
 					this.imagen2 = `data:image/png;base64,${resultadosEjecucion.plot_datos_originales}`;
-				console.log("Imagen", this.imagen);
-				console.log("Imagen2", this.imagen2);
 				this.#cdr.detectChanges();
 			});
 	}
-	// ngOnInit() {
-	//   this.test_size.setValidators([
-	//     Validators.min(0),
-	//     Validators.max(1),
-	//     this.validateTestAndTrainSize.bind(this),
-	//   ]);
-	//   this.train_size.setValidators([Validators.min(0), Validators.max(1)]);
-	// }
 
 	validateTestAndTrainSize(): AsyncValidatorFn {
 		return (
@@ -95,10 +85,7 @@ export class HomeComponent {
 		):
 			| Promise<{ [key: string]: boolean } | null>
 			| Observable<{ [key: string]: boolean } | null> => {
-			// Lógica de validación asincrónica aquí
-			// Devuelve una promesa o un observable que resuelve a null si es válido, o un objeto de error si no lo es
 			return new Promise((resolve) => {
-				// Ejemplo de lógica de validación
 				const value = control.value;
 				if (value < 0 || value > 1) {
 					resolve({ invalidSize: true });

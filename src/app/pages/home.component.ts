@@ -43,7 +43,7 @@ export class HomeComponent {
 	public shuffle = new FormControl(undefined);
 	public stratify = new FormControl(undefined);
 	public intercept = new FormControl(false);
-	public method = new FormControl("");
+	public method = new FormControl("OLS");
 	public errors: string[] = [];
 	public enviar() {
 		this.imagen = undefined;

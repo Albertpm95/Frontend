@@ -79,6 +79,10 @@ export class HomeComponent {
 			});
 	}
 
+	generarMatricesPrueba() {
+		this.#ficheroService.generarMatricesPrueba().subscribe();
+	}
+
 	validateTestAndTrainSize(): AsyncValidatorFn {
 		return (
 			control: AbstractControl,

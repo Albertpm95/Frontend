@@ -11,7 +11,7 @@ export class UtilsService {
 
 		for (const key in obj) {
 			// eslint-disable-next-line no-prototype-builtins
-			if (obj.hasOwnProperty(key)) {
+			if (Object.prototype.hasOwnProperty.call(obj, key)) {
 				const newKey = prefix ? `${prefix}.${key} ` : key;
 
 				if (typeof obj[key] === "object" && obj[key] !== null) {
@@ -20,7 +20,7 @@ export class UtilsService {
 						result,
 						this.flattenHttpErrorResponse(obj[key], newKey),
 					);
-				} else if (typeof obj[key] != "function") {
+				} else if (typeof obj[key] !== "function") {
 					// Si el valor no es un objeto, lo asignamos directamente
 					result[newKey] = obj[key];
 				}

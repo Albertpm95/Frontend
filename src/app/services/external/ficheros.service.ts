@@ -59,4 +59,10 @@ export class FicheroService {
 			formData,
 		);
 	}
+
+	generarMatricesPrueba() {
+		return this.#http.get(
+			`${environment.apiUrl}${endpoints.linear_regresion.generar_matrices_prueba}`,
+		);
+	}
 }

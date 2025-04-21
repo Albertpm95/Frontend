@@ -1,83 +1,51 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2024",
-    "module": "ES2022",
-    "baseUrl": "./src",
-    "strictBindCallApply": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "paths": {
-      "@interfaces/*": [
-        "app/interfaces/*"
-      ],
-      "@state/*": [
-        "app/state/*"
-      ],
-      "@services/*": [
-        "app/services/*"
-      ],
-      "@env/*": [
-        "environments/*"
-      ],
-      "@core/*": [
-        "app/core/*"
-      ],
-      "@shared/*": [
-        "app/shared/*"
-      ],
-      "@modules/*": [
-        "app/modules/*"
-      ],
-      "@models/*": [
-        "app/models/*"
-      ],
-      "@guards/*": [
-        "app/guards/*"
-      ],
-      "@interceptors/*": [
-        "app/interceptors/*"
-      ],
-      "@pipes/*": [
-        "app/pipes/*"
-      ],
-      "@directives/*": [
-        "app/directives/*"
-      ],
-      "@utils/*": [
-        "app/utils/*"
-      ],
-      "@config/*": [
-        "app/config/*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@app/*": [
-        "app/*"
-      ]
-    }
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "disableZone": true
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"outDir": "./dist/out-tsc",
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"moduleResolution": "bundler",
+		"importHelpers": true,
+		"target": "ES2024",
+		"module": "ES2022",
+		"baseUrl": "./src",
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"paths": {
+			"@interfaces/*": ["app/interfaces/*"],
+			"@state/*": ["app/state/*"],
+			"@services/*": ["app/services/*"],
+			"@env/*": ["environments/*"],
+			"@core/*": ["app/core/*"],
+			"@shared/*": ["app/shared/*"],
+			"@modules/*": ["app/modules/*"],
+			"@models/*": ["app/models/*"],
+			"@guards/*": ["app/guards/*"],
+			"@interceptors/*": ["app/interceptors/*"],
+			"@pipes/*": ["app/pipes/*"],
+			"@directives/*": ["app/directives/*"],
+			"@utils/*": ["app/utils/*"],
+			"@config/*": ["app/config/*"],
+			"@assets/*": ["assets/*"],
+			"@app/*": ["app/*"]
+		}
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true,
+		"disableZone": true
+	}
 }

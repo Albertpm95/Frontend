@@ -22,6 +22,9 @@
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
 		"strictPropertyInitialization": true,
+		"strictBuiltinIteratorReturn": true,
+		"forceConsistentCasingInFileNames": true,
+		"diagnostics": true,
 		"paths": {
 			"@interfaces/*": ["app/interfaces/*"],
 			"@state/*": ["app/state/*"],

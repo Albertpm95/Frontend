@@ -26,22 +26,21 @@
 		"forceConsistentCasingInFileNames": true,
 		"diagnostics": true,
 		"paths": {
-			"@interfaces/*": ["app/interfaces/*"],
-			"@state/*": ["app/state/*"],
-			"@services/*": ["app/services/*"],
-			"@env/*": ["environments/*"],
-			"@core/*": ["app/core/*"],
-			"@shared/*": ["app/shared/*"],
-			"@modules/*": ["app/modules/*"],
-			"@models/*": ["app/models/*"],
-			"@guards/*": ["app/guards/*"],
-			"@interceptors/*": ["app/interceptors/*"],
-			"@pipes/*": ["app/pipes/*"],
-			"@directives/*": ["app/directives/*"],
-			"@utils/*": ["app/utils/*"],
-			"@config/*": ["app/config/*"],
 			"@assets/*": ["assets/*"],
-			"@app/*": ["app/*"]
+			"@clases/*": ["app/shared/clases/*"],
+			"@config/*": ["app/shared/config/*"],
+			"@core/*": ["app/core/*"],
+			"@directives/*": ["app/shared/directives/*"],
+			"@env/*": ["environments/*"],
+			"@guards/*": ["app/shared/guards/*"],
+			"@interceptors/*": ["app/shared/interceptors/*"],
+			"@interfaces/*": ["app/shared/interfaces/*"],
+			"@models/*": ["app/shared/models/*"],
+			"@modules/*": ["app/modules/*"],
+			"@pipes/*": ["app/shared/pipes/*"],
+			"@services/*": ["app/shared/services/*"],
+			"@state/*": ["app/shared/state/*"],
+			"@utils/*": ["app/shared/utils/*"],
 		}
 	},
 	"angularCompilerOptions": {
@@ -49,6 +48,7 @@
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true,
-		"disableZone": true
+		"disableZone": true,
+    "typeCheckHostBindings": true
 	}
 }

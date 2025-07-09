@@ -1,11 +1,9 @@
-import { CommonModule } from "@angular/common";
 import { Component, inject, output } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { LoadLocalFilesService } from "@services/internal/load-local-files.service";
-
+import { LoadLocalFilesService } from "@services/internal/load-local-files"
 @Component({
 	selector: "input-datos",
-	imports: [CommonModule, ReactiveFormsModule],
+	imports: [ReactiveFormsModule],
 	template: `
     <div class="flex flex-col gap-4 p-4 m-4 bg-gray-200 rounded-lg shadow">
       <div class="flex flex-col gap-4 p-2">
@@ -29,16 +27,12 @@ import { LoadLocalFilesService } from "@services/internal/load-local-files.servi
 })
 export class FileSelectorComponent {
 	private readonly loadLocalFilesService = inject(LoadLocalFilesService);
-
 	fichero: File | undefined = undefined;
 	matrizTexto = new FormControl<string>("");
-
 	onSelectedFile = output<File>();
-
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	seleccionarFichero($event: any) {
 		this.fichero = $event.target?.files?.[0] as File;
-
 		if (this.fichero) this.onSelectedFile.emit(this.fichero);
 		this.loadLocalFilesService
 			.loadTxtFile(this.fichero)

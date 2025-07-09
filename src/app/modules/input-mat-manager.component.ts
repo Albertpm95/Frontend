@@ -1,7 +1,6 @@
 import { Component, inject } from "@angular/core";
-import { FicheroService } from "@services/external/ficheros.service";
-import { MatFileSelectorComponent } from "../components/input-mat.component";
-
+import { MatFileSelectorComponent } from "../shared/components/input-mat.component";
+import { FicheroService } from "@services/external/ficheros"
 @Component({
 	selector: "app-input-mat-manager",
 	imports: [MatFileSelectorComponent],
@@ -28,7 +27,6 @@ export class InputMatManagerComponent {
 	public selectFile(event: File) {
 		if (event) {
 			console.log("Fichero mat: ", event);
-
 			this.#ficheroService
 				.enviarFicheroMat(event)
 				.subscribe((response: string[]) => {

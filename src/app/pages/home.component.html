@@ -1,50 +1,49 @@
 <div class="flex flex-col p-4 gap-4">
   <div class="flex flex-wrap gap-4 p-4 bg-gray-100 rounded-lg shadow">
     <div class="flex flex-col gap-1">
-      <label for="test_size" class="text-gray-700 text-sm font-medium">Test size</label>
-      <input id="test_size" type="number" step="0.01" min="0" max="1" [formControl]="test_size" class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
+      <label class="text-gray-700 text-sm font-medium" for="test_size">Test size</label>
+      <input class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" id="test_size" type="number" step="0.01" min="0" max="1" [formControl]="test_size">
     </div>
     <div class="flex flex-col gap-1">
-      <label for="train_size" class="text-gray-700 text-sm font-medium">Train size</label>
-      <input id="train_size" type="number" step="0.01" min="0" max="1" [formControl]="train_size" class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
+      <label class="text-gray-700 text-sm font-medium" for="train_size">Train size</label>
+      <input class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" id="train_size" type="number" step="0.01" min="0" max="1" [formControl]="train_size">
     </div>
     <div class="flex flex-col gap-1">
-      <label for="random_state" class="text-gray-700 text-sm font-medium">Random state</label>
-      <input id="random_state" type="number" min="0" [formControl]="random_state" class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
+      <label class="text-gray-700 text-sm font-medium" for="random_state">Random state</label>
+      <input class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" id="random_state" type="number" min="0" [formControl]="random_state">
     </div>
     <div class="flex flex-row gap-1">
-      <label for="shuffle" class="text-gray-700 text-sm font-medium">Shuffle</label>
-      <input id="shuffle" type="checkbox" [formControl]="shuffle" class="w-6 h-6 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
+      <label class="text-gray-700 text-sm font-medium" for="shuffle">Shuffle</label>
+      <input class="w-6 h-6 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" id="shuffle" type="checkbox" [formControl]="shuffle">
     </div>
     <div class="flex flex-col gap-1">
-      <label for="stratify" class="text-gray-700 text-sm font-medium">Stratify</label>
-      <input id="stratify" type="text" [formControl]="stratify" class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
+      <label class="text-gray-700 text-sm font-medium" for="stratify">Stratify</label>
+      <input class="w-24 p-2 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" id="stratify" type="text" [formControl]="stratify">
     </div>
     <div class="flex flex-row gap-1">
-      <label for="intercept" class="text-gray-700 text-sm font-medium">Fit intercept</label>
-      <input id="intercept" type="checkbox" [defaultChecked]="false" [formControl]="intercept" class="w-6 h-6 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" />
+      <label class="text-gray-700 text-sm font-medium" for="intercept">Fit intercept</label>
+      <input class="w-6 h-6 border border-gray-300 rounded-md focus:ring focus:ring-amber-300" id="intercept" type="checkbox" [defaultChecked]="false" [formControl]="intercept">
     </div>
     <div class="flex flex-col gap-1">
-      <label for="method" class="text-gray-700 text-sm font-medium">Método</label>
-      <select [formControl]="method" id="method" class="w-32 p-2 border border-gray-300 rounded-md bg-white shadow">
+      <label class="text-gray-700 text-sm font-medium" for="method">Método</label>
+      <select class="w-32 p-2 border border-gray-300 rounded-md bg-white shadow" id="method" [formControl]="method">
         <option>OLS</option>
         <option>NNLS</option>
         <option>CLS</option>
       </select>
     </div>
-    <button (click)="enviar()" class="bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition">
+    <button class="bg-amber-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition" (click)="enviar()">
       Enviar
     </button>
-    <button (click)="generarMatricesPrueba()" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition">
+    <button class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-amber-600 transition" (click)="generarMatricesPrueba()">
       Generar matrices de prueba
     </button>
   </div>
-
   <div class="flex flex-col gap-6">
     @if(imagen){
-    <img id="resultados-plot" alt="Resultado del plot" [src]="[imagen]" fill placeholder />
+    <img id="resultados-plot" alt="Resultado del plot" [src]="[imagen]" fill placeholder>
     } @if(imagen2){
-    <img id="resultados-originales" alt="Plot datos originales" [src]="[imagen2]" fill placeholder />
+    <img id="resultados-originales" alt="Plot datos originales" [src]="[imagen2]" fill placeholder>
     }
     <div class="flex flex-col gap-4 p-2">
       <app-input-datos-manager [tipo]="'INDEPENDIENTE'"></app-input-datos-manager>
@@ -52,7 +51,6 @@
       <app-input-datos-manager [tipo]="'PLOT'"></app-input-datos-manager>
       <app-input-mat-manager></app-input-mat-manager>
     </div>
-
     <div class="flex flex-col justify-items-center bg-gray-100 rounded-lg shadow">
       <ul>
         @for (error of errors; track error) {

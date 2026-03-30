@@ -1,5 +1,5 @@
 import { computed, effect } from "@angular/core";
-import type { Fichero } from "@interfaces/ficheros.interface";
+import { Fichero } from "@interfaces/ficheros"
 import {
 	getState,
 	signalStore,
@@ -7,17 +7,14 @@ import {
 	withHooks,
 	withState,
 } from "@ngrx/signals";
-
 type FicheroState = {
 	listaFicherosServidor: Fichero[][];
 	isLoading: boolean;
 };
-
 const initialState: FicheroState = {
 	listaFicherosServidor: [],
 	isLoading: false,
 };
-
 export const FicherosStore = signalStore(
 	{ providedIn: "root" },
 	withState(initialState),

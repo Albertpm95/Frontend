@@ -1,10 +1,8 @@
-import { Component, inject, input } from "@angular/core";
-import { FileSelectorComponent } from "@app/components/input-datos.component";
-import type { Fichero } from "@interfaces/ficheros.interface";
-import { FilesListService } from "@services/internal/files-list.service";
-
+import { Component, inject, input } from "@angular/core"
+import { Fichero } from "@interfaces/ficheros"
+import { FilesListService } from "@services/internal/files-list"
+import { FileSelectorComponent } from "app/shared/components/input-datos.component"
 type VariableOptions = "DEPENDIENTE" | "INDEPENDIENTE" | "PLOT" | "MAT";
-
 @Component({
 	selector: "app-input-datos-manager",
 	imports: [FileSelectorComponent],
@@ -40,7 +38,6 @@ export class InputDatosManagerComponent {
 	ficheros: { id: number; fichero: Fichero | undefined }[] = [
 		{ id: 0, fichero: undefined },
 	];
-
 	limpiarListaFicheros() {
 		switch (this.tipo()) {
 			case "INDEPENDIENTE":
@@ -56,7 +53,6 @@ export class InputDatosManagerComponent {
 				break;
 		}
 	}
-
 	public limpiarUltimoFichero() {
 		switch (this.tipo()) {
 			case "INDEPENDIENTE":
@@ -85,7 +81,6 @@ export class InputDatosManagerComponent {
 					break;
 			}
 	}
-
 	public addFicheroExtra() {
 		if (this.ficheros && this.ficheros.length < 4) {
 			this.ficheros.push({ id: this.ficheros.length, fichero: undefined });

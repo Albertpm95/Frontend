@@ -1,11 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
-import type { RegresionMultipleResponse } from "@interfaces/regresion-multiple-response.interface";
-import { FilesListService } from "@services/internal/files-list.service";
-import { endpoints } from "endpoints";
-import { environment } from "environment";
-import type { Observable } from "rxjs";
-
+import { HttpClient } from "@angular/common/http"
+import { Injectable, inject } from "@angular/core"
+import { RegresionMultipleResponse } from "@interfaces/regresion-multiple-response"
+import { FilesListService } from "@services/internal/files-list"
+import { endpoints } from "endpoints"
+import { environment } from "environment"
+import { Observable } from "rxjs"
 @Injectable({
 	providedIn: "root",
 })
@@ -29,28 +28,23 @@ export class FicheroService {
 		if (shuffle) formData.append("shuffle", shuffle.toString());
 		if (stratify) formData.append("stratify", stratify.toString());
 		if (intercept) formData.append("intercept", intercept.toString());
-
 		const files: { ficheros_matrices: File[]; ficheros_plot: File[] } =
 			this.#filesListService.getFiles();
-
 		for (const fichero of files.ficheros_matrices) {
 			if (fichero) {
 				formData.append("matrices", fichero);
 			}
 		}
-
 		for (const fichero of files.ficheros_plot) {
 			if (fichero) {
 				formData.append("plots", fichero);
 			}
 		}
-
 		return this.#http.post<RegresionMultipleResponse>(
 			`${environment.apiUrl}${endpoints.linear_regresion.concatenacion_plot}`,
 			formData,
 		);
 	}
-
 	enviarFicheroMat(file: File): Observable<string[]> {
 		const formData = new FormData();
 		formData.append("mat_file", file);
@@ -59,7 +53,6 @@ export class FicheroService {
 			formData,
 		);
 	}
-
 	generarMatricesPrueba() {
 		return this.#http.get(
 			`${environment.apiUrl}${endpoints.linear_regresion.generar_matrices_prueba}`,
